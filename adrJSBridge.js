@@ -5,10 +5,10 @@ function sendEmail(to, cc, subject, body, successCallback, errorCallback)
 		API.sendEmail();
 	}
 	else
-		callNativeFunction("sendEmail", [to, cc, subject, body], successCallback, errorCallback);
+		_callNativeFunction("sendEmail", [to, cc, subject, body], successCallback, errorCallback);
 }
 
-function callNativeFunction(functionName, args, successCallback, errorCallback)
+function _callNativeFunction(functionName, args, successCallback, errorCallback)
 {
     var url = "adrJSBridge://";
 
@@ -19,7 +19,7 @@ function callNativeFunction(functionName, args, successCallback, errorCallback)
     {
         if (typeof successCallback == 'function')
         {
-            var callbackFuncName = createCallbackFunction(functionName + "_" + "successCallback", successCallback);
+            var callbackFuncName = _createCallbackFunction(functionName + "_" + "successCallback", successCallback);
             callInfo.success = callbackFuncName;
         }
         else
@@ -30,7 +30,7 @@ function callNativeFunction(functionName, args, successCallback, errorCallback)
     {
         if (typeof errorCallback == 'function')
         {
-            var callbackFuncName = createCallbackFunction(functionName + "_" + "errorCallback", errorCallback);
+            var callbackFuncName = _createCallbackFunction(functionName + "_" + "errorCallback", errorCallback);
             callInfo.error = callbackFuncName;
         }
         else
@@ -44,14 +44,13 @@ function callNativeFunction(functionName, args, successCallback, errorCallback)
 
     url += JSON.stringify(callInfo)
 
-    //eval(callbackFuncName + "({message:'This is a test<br>'})");
 
-    var iFrame = createIFrame(url);
+    var iFrame = _createIFrame(url);
     //remove the frame now
     iFrame.parentNode.removeChild(iFrame);
 }
 
-function createCallbackFunction (funcName, callbackFunc)
+function _createCallbackFunction (funcName, callbackFunc)
 {
     if (callbackFunc && callbackFunc.name != null && callbackFunc.name.length > 0)
     {
@@ -81,7 +80,7 @@ function createCallbackFunction (funcName, callbackFunc)
     }
 }
 
-function createIFrame(src)
+function _createIFrame(src)
 {
     var rootElm = document.documentElement;
     var newFrameElm = document.createElement("IFRAME");
