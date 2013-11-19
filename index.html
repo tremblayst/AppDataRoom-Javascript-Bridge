@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+<script src="adrJSBridge.js"></script>
+    <script>
+        function sendMail()
+        {
+            sendEmail("scottyolson@gmail.com", "", "test subject", "test body", "onSuccess", "onError");
+
+        }
+        function onSuccess (ret)
+        {
+            if (ret)
+            {
+                var obj = JSON.parse(ret);
+                document.write(obj.result);
+            }
+        }
+
+        function onError (ret)
+        {
+            if (ret)
+            {
+                var obj = JSON.parse(ret);
+                document.write(obj.error);
+            }
+        }
+    </script>
+</head>
+<body>
+<button type="button" onclick="sendMail()">Send email</button>
+</body>
+</html>
