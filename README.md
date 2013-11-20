@@ -58,7 +58,7 @@ Simply include the adrJSBridge.js file and call any of the public methods.  See 
   * (function) function to be called on error
 
 
-##logEvent
+###logEvent
   Logs an event to the App Data Room analytics engine, which will then be queued to be sent up to Media Manager when a connection is available
 
 #####Parameters
