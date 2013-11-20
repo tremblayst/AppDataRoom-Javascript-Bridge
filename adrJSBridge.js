@@ -8,6 +8,37 @@ function sendEmail(to, cc, subject, body, successCallback, errorCallback)
 		_callNativeFunction("sendEmail", [to, cc, subject, body], successCallback, errorCallback);
 }
 
+
+function getItem(key, successCallback, errorCallback)
+{
+    if(useAPI)
+    {
+        API.getItem(key);
+    }
+    else
+        _callNativeFunction("getValue", [key], successCallback, errorCallback);
+}
+
+function setItem(key, value, successCallback, errorCallback)
+{
+    if(useAPI)
+    {
+        API.setItem(key, value);
+    }
+    else
+        _callNativeFunction("setValue", [key, value], successCallback, errorCallback);
+}
+
+function logEvent(object, action, additionalParams, successCallback, errorCallback)
+{
+    if(useAPI)
+    {
+        API.logEvent(object, action, additionalParams);
+    }
+    else
+        _callNativeFunction("logEvent", [object, action, additionalParams], successCallback, errorCallback);
+}
+
 function _callNativeFunction(functionName, args, successCallback, errorCallback)
 {
     var url = "adrJSBridge://";
