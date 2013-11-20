@@ -3,10 +3,18 @@ AppDataRoom-Javascript-Bridge
 
 Javascript bridge that provides native functionality to web bundles running within App Data Room
 
+#####Usage:
 
-#Public Methods:
+Simply include the adrJSBridge.js file and call any of the public methods.  See index.html for usage examples.
 
-##sendEmail
+ ```javascript
+ adr.sendEmail("test@gmail.com", "", "test subject", "test body", onSuccess, onError);
+ ```
+
+
+##Public Methods:
+
+###sendEmail
   Sends an email via the platform's native mail application
 
 #####Parameters
@@ -24,7 +32,7 @@ Javascript bridge that provides native functionality to web bundles running with
   * (function) function to be called on error
 
 
-##getItem
+###getItem
   Gets a value for a specified key from the native local database
 
 #####Parameters
@@ -36,7 +44,7 @@ Javascript bridge that provides native functionality to web bundles running with
   * (function) function to be called on error
 
 
-##setItem
+###setItem
   Sets a value for a specified key to the native local database
 
 #####Parameters
