@@ -9,6 +9,10 @@
         {
             adr.sendEmail("test@gmail.com", "", "test subject", "test body", onSuccess, onError);
         }
+        function sendHTMLMail()
+        {
+            adr.sendEmail("test@gmail.com", "", "test subject", "<a href='http://www.google.com'>googles</a>", onSuccess, onError);
+        }
         function getStorageItem()
         {
             adr.getItem("test", onSuccess, onError);
@@ -42,6 +46,7 @@
 </head>
 <body>
 <button type="button" onclick="sendMail()">Send email</button><br/>
+<button type="button" onclick="sendHTMLMail()">Send html email</button><br/>
 <button type="button" onclick="getStorageItem()">Get Storage</button><br/>
 <button type="button" onclick="setStorageItem()">Set Storage</button><br/>
 <button type="button" onclick="logAnalytics()">Log Event</button><br/>
