@@ -50,3 +50,20 @@ Javascript bridge that provides native functionality to web bundles running with
   * (function) function to be called on error
 
 
+##logEvent
+  Logs an event to the App Data Room analytics engine, which will then be queued to be sent up to Media Manager when a connection is available
+
+#####Parameters
+* object
+  * (string) object parameter of event
+* action
+  * (string) action parameter of event
+* additionalParams
+  * (string) key value pair listing of additional parameters (example: "email:test@gmail.com")
+* successCallback
+  * (function) function to be called on success
+* errorCallback
+  * (function) function to be called on error
+
+
+
