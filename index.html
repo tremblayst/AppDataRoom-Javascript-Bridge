@@ -7,19 +7,19 @@
     <script>
         function sendMail()
         {
-            sendEmail("test@gmail.com", "", "test subject", "test body", "onSuccess", "onError");
+            adr.sendEmail("test@gmail.com", "", "test subject", "test body", onSuccess, onError);
         }
         function getStorageItem()
         {
-            getItem("test", "onSuccess", "onError");
+            adr.getItem("test", onSuccess, onError);
         }
         function setStorageItem()
         {
-            setItem("test", "testValue", "onSuccess", "onError");
+            adr.setItem("test", "testValue", onSuccess, onError);
         }
         function logAnalytics()
         {
-            logEvent("test object", "test action", "param", "onSuccess", "onError");
+            adr.logEvent("test object", "test action", "param", onSuccess, onError);
         }
         function onSuccess (ret)
         {
