@@ -75,10 +75,13 @@ var adr = function() {
         rootElm.appendChild(newFrameElm);
         return newFrameElm;
     };
+    var _esc_quote = function(text){
+        return text.replace("\"", "\\\"").replace("\'", "\\\'");;
+    };
     return {
         sendEmail : function(to, cc, subject, body, successCallback, errorCallback) {
             if(typeof useAPI === 'undefined')
-                _callNativeFunction("sendEmail", [to, cc, subject, body], successCallback, errorCallback);
+                _callNativeFunction("sendEmail", [to, cc, subject, _esc_quote(body)], successCallback, errorCallback);
             else
                 API.sendEmail();
         },
