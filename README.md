@@ -78,4 +78,14 @@ Simply include the adrJSBridge.js file and call any of the public methods.  See 
   * (function) function to be called on error
 
 
+###scanPDF417Barcode
+  Scans a PDF 417 barcode and returns the text encoded in the barcode (encoded in base64)
+  Support: iOS v1.7.2+, Cat Sales 2.1 +
+
+#####Parameters
+* successCallback
+  * (function) function to be called on success
+* errorCallback
+  * (function) function to be called on error
+
 
