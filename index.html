@@ -17,6 +17,7 @@
         {
             adr.getItem("test", onSuccess, onError);
         }
+
         function setStorageItem()
         {
             adr.setItem("test", "testValue", onSuccess, onError);
@@ -29,12 +30,26 @@
         {
             adr.logEvent("test object", "test action", "param", onSuccess, onError);
         }
+        function scanPDF417Barcode()
+        {
+            adr.scanPDF417Barcode(onSuccessBase64, onError);
+        }
         function onSuccess (ret)
         {
             if (ret)
             {
                 var obj = JSON.parse(ret);
                 document.write(obj.result);
+                //alert(obj.result);
+            }
+        }
+        function onSuccessBase64 (ret)
+        {
+            if (ret)
+            {
+                var obj = JSON.parse(Base64.decode(ret));
+                document.write(obj.result);
+                //alert(obj.result);
             }
         }
 
@@ -55,5 +70,7 @@
 <button type="button" onclick="setStorageItem()">Set Storage</button><br/>
 <button type="button" onclick="setComplexStorageItem()">Set Complex Storage</button><br/>
 <button type="button" onclick="logAnalytics()">Log Event</button><br/>
+<button type="button" onclick="scanPDF417Barcode()">Scan PDF 417 barcode</button><br/>
+
 </body>
 </html>
