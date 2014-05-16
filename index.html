@@ -34,6 +34,10 @@
         {
             adr.scanPDF417Barcode(onSuccessBase64, onError);
         }
+        function getCurrentUserName()
+        {
+            adr.getCurrentUserName(onSuccessBase64, onError);
+        }
         function onSuccess (ret)
         {
             if (ret)
@@ -71,6 +75,7 @@
 <button type="button" onclick="setComplexStorageItem()">Set Complex Storage</button><br/>
 <button type="button" onclick="logAnalytics()">Log Event</button><br/>
 <button type="button" onclick="scanPDF417Barcode()">Scan PDF 417 barcode</button><br/>
+<button type="button" onclick="getCurrentUserName()">Get Current User Name</button><br/>
 
 </body>
 </html>

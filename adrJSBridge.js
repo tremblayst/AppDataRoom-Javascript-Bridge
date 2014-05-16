@@ -108,6 +108,12 @@ var adr = function() {
                 _callNativeFunction("scanPDF417Barcode", null, successCallback, errorCallback);
             else
                 API.scanPDF417Barcode();
+        },
+        getCurrentUserName : function(successCallback, errorCallback) {
+            if(typeof useAPI === 'undefined')
+                _callNativeFunction("getCurrentUserName", null, successCallback, errorCallback);
+            else
+                API.getCurrentUserName();
         }
     };
 }();

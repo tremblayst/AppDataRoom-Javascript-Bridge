@@ -88,4 +88,12 @@ Simply include the adrJSBridge.js file and call any of the public methods.  See 
 * errorCallback
   * (function) function to be called on error
 
+###getCurrentUserName
+  Returns the currently logged in user's name (first and last) (encoded in base64)
+  Support: iOS v1.7.8+, Cat Sales 2.2 +
 
+#####Parameters
+* successCallback
+  * (function) function to be called on success
+* errorCallback
+  * (function) function to be called on error
