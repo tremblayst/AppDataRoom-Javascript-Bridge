@@ -49,6 +49,8 @@ var adr = function() {
         if (typeof window[funcName+0] != 'function')
         {
             window[funcName+0] = callbackFunc;
+            if(typeof yourvar == 'undefined')
+                __functionIndexMap = [];
             __functionIndexMap[funcName] = 0;
             return funcName+0
 
