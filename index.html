@@ -17,13 +17,26 @@
         {
             adr.getItem("test", onSuccess, onError);
         }
+
         function setStorageItem()
         {
             adr.setItem("test", "testValue", onSuccess, onError);
         }
+        function setComplexStorageItem()
+        {
+            adr.setItem("test", "[{'id':0,'room_name':'first room','system':'Wi-Box Solution','r_system':'Philips(Witt Series IV)','ao_source':'','mounting':'','using_pw':'','using_ecg':'','ffr':'','cable_data':{'name':'Philips(Witt Series IV)','adapter_ao_in':'C12648','monitor_ao_out':'C12948','aux_in_ecg_in':'C12504','aux_in_ao_in':'C12504','monitor_pw_out':'C12948','note':''},'active':true,'done':true},{'id':1,'room_name':'2nd room','system':'PressureWire Receiver','r_system':'Siemens/Draeger Sensis 10 pin','ao_source':'','mounting':'','using_pw':'','using_ecg':'','ffr':'','cable_data':{'name':'Siemens/Draeger Sensis 10 pin','adapter_ao_in':'C12601','monitor_ao_out':'C12901','aux_in_ecg_in':'C12502','aux_in_ao_in':'C12502','monitor_pw_out':'C12901','note':'AO/ECG is one cable'},'active':true,'done':true},{'id':2,'room_name':'third area','system':'QUANTIEN Platform','r_system':'Camtronics PhysioLog PDM Monitor (Schiller V1)','ao_source':'Aux-In AO (Cabled)','mounting':'Available on-site','using_pw':'Yes','using_ecg':'Yes','ffr':'','cable_data':{'name':'Camtronics PhysioLog PDM Monitor (Schiller V1)','adapter_ao_in':'C12651','monitor_ao_out':'C12951','aux_in_ecg_in':'C12503','aux_in_ao_in':'C12503','monitor_pw_out':'C12951','note':''},'active':true,'done':true},{'id':3,'room_name':'Newest room','system':'ILUMIEN System','r_system':'Gould 13-4615-50','ao_source':'','mounting':'','using_pw':'','using_ecg':'','ffr':'Yes','cable_data':{'name':'Gould 13-4615-50','adapter_ao_in':'C12614','monitor_ao_out':'C12914','aux_in_ecg_in':'','aux_in_ao_in':'','monitor_pw_out':'C12914','note':''},'active':true,'done':true}]", onSuccess, onError);
+        }
         function logAnalytics()
         {
             adr.logEvent("test object", "test action", "param", onSuccess, onError);
+        }
+        function scanPDF417Barcode()
+        {
+            adr.scanPDF417Barcode(onSuccessBase64, onError);
+        }
+        function getCurrentUserName()
+        {
+            adr.getCurrentUserName(onSuccessBase64, onError);
         }
         function onSuccess (ret)
         {
@@ -31,6 +44,16 @@
             {
                 var obj = JSON.parse(ret);
                 document.write(obj.result);
+                //alert(obj.result);
+            }
+        }
+        function onSuccessBase64 (ret)
+        {
+            if (ret)
+            {
+                var obj = JSON.parse(Base64.decode(ret));
+                document.write(obj.result);
+                //alert(obj.result);
             }
         }
 
@@ -49,6 +72,10 @@
 <button type="button" onclick="sendHTMLMail()">Send html email .</button><br/>
 <button type="button" onclick="getStorageItem()">Get Storage</button><br/>
 <button type="button" onclick="setStorageItem()">Set Storage</button><br/>
+<button type="button" onclick="setComplexStorageItem()">Set Complex Storage</button><br/>
 <button type="button" onclick="logAnalytics()">Log Event</button><br/>
+<button type="button" onclick="scanPDF417Barcode()">Scan PDF 417 barcode</button><br/>
+<button type="button" onclick="getCurrentUserName()">Get Current User Name</button><br/>
+
 </body>
 </html>

@@ -16,6 +16,7 @@ Simply include the adrJSBridge.js file and call any of the public methods.  See 
 
 ###sendEmail
   Sends an email via the platform's native mail application
+  Support: iOS v1.7.0+, Windows v1.1+
 
 #####Parameters
 * to
@@ -34,6 +35,7 @@ Simply include the adrJSBridge.js file and call any of the public methods.  See 
 
 ###getItem
   Gets a value for a specified key from the native local database
+  Support: iOS v1.7.0+
 
 #####Parameters
 * key
@@ -46,6 +48,7 @@ Simply include the adrJSBridge.js file and call any of the public methods.  See 
 
 ###setItem
   Sets a value for a specified key to the native local database
+  Support: iOS v1.7.0+
 
 #####Parameters
 * key
@@ -60,6 +63,7 @@ Simply include the adrJSBridge.js file and call any of the public methods.  See 
 
 ###logEvent
   Logs an event to the App Data Room analytics engine, which will then be queued to be sent up to Media Manager when a connection is available
+  Support: iOS v1.7.0+
 
 #####Parameters
 * object
@@ -74,4 +78,22 @@ Simply include the adrJSBridge.js file and call any of the public methods.  See 
   * (function) function to be called on error
 
 
+###scanPDF417Barcode
+  Scans a PDF 417 barcode and returns the text encoded in the barcode (encoded in base64)
+  Support: iOS v1.7.2+, Cat Sales 2.1 +
 
+#####Parameters
+* successCallback
+  * (function) function to be called on success
+* errorCallback
+  * (function) function to be called on error
+
+###getCurrentUserName
+  Returns the currently logged in user's name (first and last) (encoded in base64)
+  Support: iOS v1.7.8+, Cat Sales 2.2 +
+
+#####Parameters
+* successCallback
+  * (function) function to be called on success
+* errorCallback
+  * (function) function to be called on error
