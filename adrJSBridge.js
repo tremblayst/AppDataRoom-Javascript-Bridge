@@ -83,25 +83,25 @@ var adr = function() {
             if(typeof useAPI === 'undefined')
                 _callNativeFunction("sendEmail", [to, cc, subject, _esc_quote(body)], successCallback, errorCallback);
             else
-                API.sendEmail();
+                API.sendEmail(to, cc, subject, body, successCallback, errorCallback);
         },
         getItem : function(key, successCallback, errorCallback) {
             if(typeof useAPI === 'undefined')
                 _callNativeFunction("getValue", [key], successCallback, errorCallback);
             else
-                API.getItem(key);
+                API.getItem(key, successCallback, errorCallback);
         },
         setItem : function(key, value, successCallback, errorCallback) {
             if(typeof useAPI === 'undefined')
                 _callNativeFunction("setValue", [key, value], successCallback, errorCallback);
             else
-                API.setItem(key, value);
+                API.setItem(key, value, successCallback, errorCallback);
         },
         logEvent : function(object, action, additionalParams, successCallback, errorCallback) {
             if(typeof useAPI === 'undefined')
                 _callNativeFunction("logEvent", [object, action, additionalParams], successCallback, errorCallback);
             else
-                API.logEvent(object, action, additionalParams);
+                API.logEvent(object, action, additionalParams, successCallback, errorCallback);
         }
     };
 }();
