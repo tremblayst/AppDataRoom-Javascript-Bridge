@@ -1,5 +1,14 @@
 var adr = function() {
-
+    var _massageArgsJsToNative = function(args) {
+        if (!args){
+            return args;
+        }
+        var ret = [];
+        args.forEach(function(arg, i) {
+           ret.push(Base64.encode(arg)); 
+        });
+        return ret;
+    };
     var _callNativeFunction = function(functionName, args, successCallback, errorCallback) {
         var url = "adrJSBridge://";
 
@@ -40,6 +49,48 @@ var adr = function() {
         //remove the frame now
         iFrame.parentNode.removeChild(iFrame);
     };
+    var _callNativeFunctionEncoded = function(functionName, args, successCallback, errorCallback) {
+        var url = "adrJSBridge://";
+
+        var callInfo = {};
+        callInfo.functionname = functionName;
+
+        if (successCallback)
+        {
+            if (typeof successCallback == 'function')
+            {
+                var callbackFuncName = _createCallbackFunction(functionName + "_" + "successCallback", successCallback);
+                callInfo.success = callbackFuncName;
+            }
+            else
+                callInfo.success = successCallback;
+        }
+
+        if (errorCallback)
+        {
+            if (typeof errorCallback == 'function')
+            {
+                var callbackFuncName = _createCallbackFunction(functionName + "_" + "errorCallback", errorCallback);
+                callInfo.error = callbackFuncName;
+            }
+            else
+                callInfo.error = errorCallback;
+        }
+        
+        callInfo.encoded = true;
+
+        if (args)
+        {
+            callInfo.args = _massageArgsJsToNative(args);
+        }
+
+        url += JSON.stringify(callInfo)
+
+
+        var iFrame = _createIFrame(url);
+        //remove the frame now
+        iFrame.parentNode.removeChild(iFrame);
+    };
     var _createCallbackFunction = function(funcName, callbackFunc) {
         if (callbackFunc && callbackFunc.name != null && callbackFunc.name.length > 0)
         {
@@ -49,7 +100,7 @@ var adr = function() {
         if (typeof window[funcName+0] != 'function')
         {
             window[funcName+0] = callbackFunc;
-            if(typeof yourvar == 'undefined')
+            if(typeof __functionIndexMap == 'undefined')
                 __functionIndexMap = [];
             __functionIndexMap[funcName] = 0;
             return funcName+0
@@ -84,6 +135,12 @@ var adr = function() {
         sendEmail : function(to, cc, subject, body, successCallback, errorCallback) {
             if(typeof useAPI === 'undefined')
                 _callNativeFunction("sendEmail", [to, cc, subject, _esc_quote(body)], successCallback, errorCallback);
+            else
+                API.sendEmail(to, cc, subject, body, successCallback, errorCallback);
+        },
+        sendEmailEncoded : function(to, cc, subject, body, successCallback, errorCallback) {
+            if(typeof useAPI === 'undefined')
+                _callNativeFunctionEncoded("sendEmail", [to, cc, subject, _esc_quote(body)], successCallback, errorCallback);
             else
                 API.sendEmail(to, cc, subject, body, successCallback, errorCallback);
         },
