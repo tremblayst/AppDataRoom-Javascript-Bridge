@@ -14,7 +14,27 @@ Simply include the adrJSBridge.js file and call any of the public methods.  See 
 
 ##Public Methods:
 
-###sendEmail
+
+  
+###sendEmailEncoded
+  Sends an email via the platform's native mail application using base 64 encoding for the parameters
+  Support: iOS v1.7.9+
+
+#####Parameters
+* to
+  * (string) destination email address
+* cc
+  * (string) carbon copy email address
+* subject
+  * (string) subject of email
+* body
+  * (string) body of email
+* successCallback
+  * (function) function to be called on success
+* errorCallback
+  * (function) function to be called on error
+
+###sendEmail  **_Deprecated in v1.7.9, use sendEmailEncoded instead_**
   Sends an email via the platform's native mail application
   Support: iOS v1.7.0+, Windows v1.1+
 
@@ -31,7 +51,6 @@ Simply include the adrJSBridge.js file and call any of the public methods.  See 
   * (function) function to be called on success
 * errorCallback
   * (function) function to be called on error
-
 
 ###getItem
   Gets a value for a specified key from the native local database
