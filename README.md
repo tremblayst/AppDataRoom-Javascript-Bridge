@@ -47,7 +47,7 @@ Simply include the adrJSBridge.js file and call any of the public methods.  See 
 * body
   * (string) body of email
 * attachments
-  * (array) json array of datauri
+  * (array) json array of datauri strings
 * successCallback
   * (function) function to be called on success
 * errorCallback
