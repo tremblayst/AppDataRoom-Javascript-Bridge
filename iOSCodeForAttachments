@@ -1,0 +1,132 @@
+
+/**
+ * Sets the attachments of the email draft.
+ *
+ * @param {NSArray} attachments
+ *      The attachments of the email
+ * @param {MFMailComposeViewController} draft
+ *      The email composer view
+ */
+- (void) setAttachments:(NSArray*)attatchments
+                ofDraft:(MFMailComposeViewController*)draft
+{
+    if (attatchments)
+    {
+        for (NSString* path in attatchments)
+        {
+            NSData* data = [self getDataForAttachmentPath:path];
+
+            NSString* basename = [self getBasenameFromAttachmentPath:path];
+            NSString* pathExt  = [basename pathExtension];
+            NSString* fileName = [basename pathComponents].lastObject;
+            NSString* mimeType = [self getMimeTypeFromFileExtension:pathExt];
+
+            [draft addAttachmentData:data mimeType:mimeType fileName:fileName];
+        }
+    }
+}
+
+/**
+ * Returns the data for a given (relative) attachment path.
+ *
+ * @param {NSString} path
+ *      An absolute/relative path or the base64 data
+ */
+- (NSData*) getDataForAttachmentPath:(NSString*)path
+{
+    //if ([path hasPrefix:@"file:"])
+    //{
+    //    return [self dataForAbsolutePath:path];
+    //}
+    //else if ([path hasPrefix:@"res:"])
+    //{
+    //    return [self dataForResource:path];
+    //}
+    //else if ([path hasPrefix:@"www:"])
+    //{
+    //    return [self dataForAsset:path];
+    //}
+    //else 
+    if ([path hasPrefix:@"base64:"])
+    {
+        return [self dataFromBase64:path];
+    }
+
+    //NSFileManager* fileManager = [NSFileManager defaultManager];
+
+    //if (![fileManager fileExistsAtPath:path]){
+    //    NSLog(@"Attachment path not found: %@", path);
+    //}
+
+    //return [fileManager contentsAtPath:path];
+    return null;
+}
+
+/**
+ * Retrieves the data for a base64 encoded string.
+ *
+ * @param {NSString} base64String
+ *      Base64 encoded string
+ */
+- (NSData*) dataFromBase64:(NSString*)base64String
+{
+    NSUInteger length = [base64String length];
+    NSRegularExpression *regex;
+    NSString *dataString;
+
+    regex = [NSRegularExpression regularExpressionWithPattern:@"^base64:[^/]+.."
+                                                      options:NSRegularExpressionCaseInsensitive
+                                                        error:Nil];
+
+    dataString = [regex stringByReplacingMatchesInString:base64String
+                                                 options:0
+                                                   range:NSMakeRange(0, length)
+                                            withTemplate:@""];
+
+    NSData* data = [NSData dataFromBase64String:dataString];
+
+    return data;
+}
+
+/**
+ * Retrieves the attachments basename.
+ *
+ * @param {NSString} path
+ *      The file path or bas64 data of the attachment
+ */
+- (NSString*) getBasenameFromAttachmentPath:(NSString*)path
+{
+    if ([path hasPrefix:@"base64:"])
+    {
+        NSString* pathWithoutPrefix;
+
+        pathWithoutPrefix = [path stringByReplacingOccurrencesOfString:@"base64:"
+                                                            withString:@""];
+
+        return [pathWithoutPrefix substringToIndex:
+                [pathWithoutPrefix rangeOfString:@"//"].location];
+    }
+
+    return path;
+
+}
+
+/**
+ * Retrieves the mime type from the file extension.
+ *
+ * @param {NSString} extension
+ *      The file's extension
+ */
+- (NSString*) getMimeTypeFromFileExtension:(NSString*)extension
+{
+    if (!extension) {
+        return nil;
+    }
+
+    // Get the UTI from the file's extension
+    CFStringRef ext = (CFStringRef)CFBridgingRetain(extension);
+    CFStringRef type = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, ext, NULL);
+
+    // Converting UTI to a mime type
+    return (NSString*)CFBridgingRelease(UTTypeCopyPreferredTagWithClass(type, kUTTagClassMIMEType));
+}
