@@ -33,11 +33,6 @@ Simply include the adrJSBridge.js file and call any of the public methods.  See 
   * (function) function to be called on success
 * errorCallback
   * (function) function to be called on error
-  
-###sendEmailEncodedWithAttachments
-  Sends an email via the platform's native mail application using base 64 encoding for the parameters
-  Support: iOS v1.7.9+
-
 
 ###sendEmailEncodedWithAttachments
   Sends an email via the platform's native mail application using base 64 encoding for the parameters and includes a parameter for attaching an array of attachments using their datauri.
